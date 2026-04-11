@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Book {
@@ -50,10 +51,8 @@ public:
 int main() {
     Book books[5];
 
-    // Initialising books
     books[0].setBookDetails("Rich Dad Poor Dad", "Robert T. Kiyosaki", "1", true);
-    books[1].setBookDetails("The Richest Man in Babylon", "George Samuel Clason
-", "2", true);
+    books[1].setBookDetails("The Richest Man in Babylon", "George Samuel Clason", "2", true);
     books[2].setBookDetails("In The Name of The People", "Bruno Perini", "3", true);
     books[3].setBookDetails("Atomic Habits", "James Clear", "4", true);
     books[4].setBookDetails("Assassin's Creed: Renaissance", "Oliver Bowden", "5", true);
