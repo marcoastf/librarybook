@@ -1,0 +1,131 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    string title;
+    string author;
+    string ISBN;
+    bool availability;
+
+public:
+    void setBookDetails(string t, string a, string i, bool av) {
+        title = t;
+        author = a;
+        ISBN = i;
+        availability = av;
+    }
+
+    void displayBookDetails() {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "ISBN: " << ISBN << endl;
+        cout << "Available: " << (availability ? "Yes" : "No") << endl;
+        cout << "----------------------" << endl;
+    }
+
+    void borrowBook() {
+        if (availability) {
+            availability = false;
+            cout << "Book borrowed successfully." << endl;
+        } else {
+            cout << "Book is not available." << endl;
+        }
+    }
+
+    void returnBook() {
+        if (!availability) {
+            availability = true;
+            cout << "Book returned successfully." << endl;
+        } else {
+            cout << "Book is already available in the library." << endl;
+        }
+    }
+
+    string getISBN() {
+        return ISBN;
+    }
+
+    bool isAvailable() {
+        return availability;
+    }
+};
+
+int main() {
+    Book books[5];
+    int choice;
+    string inputISBN;
+    bool found;
+
+    books[0].setBookDetails("Rich Dad Poor Dad", "Robert T. Kiyosaki", "1", true);
+    books[1].setBookDetails("The Richest Man in Babylon", "George Samuel Clason", "2", true);
+    books[2].setBookDetails("In The Name of The People", "Bruno Perini", "3", true);
+    books[3].setBookDetails("Atomic Habits", "James Clear", "4", true);
+    books[4].setBookDetails("Assassin's Creed: Renaissance", "Oliver Bowden", "5", true);
+
+    do {
+        cout << "\n===== Library Menu =====" << endl;
+        cout << "1. Display Books" << endl;
+        cout << "2. Borrow Book" << endl;
+        cout << "3. Return Book" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Select an option: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            cout << "\nLibrary Book List:\n" << endl;
+            for (int i = 0; i < 5; i++) {
+                books[i].displayBookDetails();
+            }
+            break;
+
+        case 2:
+            cout << "Enter ISBN to borrow a book: ";
+            cin >> inputISBN;
+            found = false;
+
+            for (int i = 0; i < 5; i++) {
+                if (books[i].getISBN() == inputISBN) {
+                    found = true;
+                    books[i].borrowBook();
+                    break;
+                }
+            }
+
+            if (!found) {
+                cout << "Book not found." << endl;
+            }
+            break;
+
+        case 3:
+            cout << "Enter ISBN to return a book: ";
+            cin >> inputISBN;
+            found = false;
+
+            for (int i = 0; i < 5; i++) {
+                if (books[i].getISBN() == inputISBN) {
+                    found = true;
+                    books[i].returnBook();
+                    break;
+                }
+            }
+
+            if (!found) {
+                cout << "Book not found." << endl;
+            }
+            break;
+
+        case 4:
+            cout << "Program ended." << endl;
+            break;
+
+        default:
+            cout << "Invalid option. Please try again." << endl;
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
